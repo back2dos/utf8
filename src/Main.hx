@@ -129,6 +129,12 @@ class Main extends TestCase {
       Timer.measure(function () for (_ in 0...count) for (i in 0...OldUtf8.length(s)) OldUtf8.charCodeAt(s, i));      
       trace('new bad loop');
       Timer.measure(function () for (_ in 0...count) for (i in 0...haxe.Utf8.length(s)) Utf8.charCodeAt(s, i));
+      
+      var s2 = s.substr(0, s.length - 1) + s.charAt(s.length - 1);
+      trace('old compare');
+      Timer.measure(function () for (_ in 0...count) OldUtf8.compare(s, s2));      
+      trace('new compare');
+      Timer.measure(function () for (_ in 0...count) Utf8.compare(s, s2));
     }
   }
   
